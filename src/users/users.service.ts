@@ -1,5 +1,4 @@
-import { Injectable, } from '@nestjs/common';
-import { filter } from 'rxjs';
+import { Injectable, } from '@nestjs/common'
 
 @Injectable()
 export class UsersService {
@@ -49,7 +48,7 @@ export class UsersService {
     }
 
     create(user: User) {
-        const usersByHighestId = [...this.users].sort((a, b) => a.id - b.id)
+        const usersByHighestId = [...this.users].sort((a, b) => b.id - a.id)
 
         const newUser = {
             id: usersByHighestId[0].id + 1,
@@ -62,7 +61,7 @@ export class UsersService {
     }
 
     updateOne(id: number, user: OptionalUser) {
-        this.users.map(u => u.id === id ? { ...u, ...user } : u)
+        this.users = this.users.map(u => u.id === id ? { ...u, ...user } : u)
 
         return this.findOne(id)
     }
